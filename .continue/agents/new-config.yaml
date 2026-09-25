@@ -1,0 +1,14 @@
+name: FreeLLMAPI Config
+version: 1.0.0
+schema: v1
+
+models:
+  - name: FreeLLMAPI Auto
+    provider: openai
+    model: auto
+    apiBase: http://localhost:3001/v1
+    apiKey: freellmapi-09f70e3dfab1621c9eb43af585971105f72419bda6c6d06f
+    roles:
+      - chat
+      - edit
+      - apply

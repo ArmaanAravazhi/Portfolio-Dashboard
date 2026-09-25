@@ -9,6 +9,11 @@
 <body>
 	<header class="site-header">
 		<a class="site-title" href="#top" aria-label="Signs of student life home">Signs of student life</a>
+		<nav class="section-nav" aria-label="Gallery sections" role="tablist">
+			<button class="section-nav__button" type="button" role="tab" aria-selected="true" aria-controls="section-focus" data-section-tab="section-focus">01 Focus</button>
+			<button class="section-nav__button" type="button" role="tab" aria-selected="false" aria-controls="section-routine" data-section-tab="section-routine">02 Routine</button>
+			<button class="section-nav__button" type="button" role="tab" aria-selected="false" aria-controls="section-culture" data-section-tab="section-culture">03 Culture</button>
+		</nav>
 		<button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false" data-theme-toggle>
 			<span aria-hidden="true">&#9788;</span>
 			<span class="theme-toggle__label">Light mode</span>
@@ -16,12 +21,12 @@
 	</header>
 
 	<main id="top">
-		<section class="gallery-section" aria-labelledby="intellectual-focus-heading">
+		<section class="gallery-section gallery-section--desk" id="section-focus" role="tabpanel" aria-labelledby="intellectual-focus-heading">
 			<div class="section-heading">
 				<p class="section-number">01</p>
 				<h1 id="intellectual-focus-heading">Intellectual Focus</h1>
 			</div>
-			<div class="workspace-grid">
+			<div class="workspace-grid study-desk">
 				<figure class="photo-card">
 					<button class="photo-card__trigger" type="button" data-lightbox="true" data-title="Logic proofs">
 						<img src="images/Logic Proofs.jpeg" alt="Laptop displaying code beside an open notebook with handwritten logic proofs" loading="lazy">
@@ -55,7 +60,7 @@
 			</div>
 		</section>
 
-		<section class="gallery-section" aria-labelledby="daily-survival-heading">
+		<section class="gallery-section" id="section-routine" role="tabpanel" aria-labelledby="daily-survival-heading">
 			<div class="section-heading">
 				<p class="section-number">02</p>
 				<h2 id="daily-survival-heading">Daily Survival &amp; Routine</h2>
@@ -94,31 +99,45 @@
 			</div>
 		</section>
 
-		<section class="gallery-section" aria-labelledby="campus-culture-heading">
+		<section class="gallery-section gallery-section--board" id="section-culture" role="tabpanel" aria-labelledby="campus-culture-heading">
 			<div class="section-heading">
 				<p class="section-number">03</p>
 				<h2 id="campus-culture-heading">Expression &amp; Campus Culture</h2>
 			</div>
-			<div class="environment-grid">
-				<figure class="photo-card">
+			<div class="notice-board-controls">
+				<button class="notice-shuffle" type="button" data-notice-shuffle>Shuffle board <span aria-hidden="true">↗</span></button>
+			</div>
+			<div class="notice-board" data-notice-board>
+				<span class="notice-board__label" aria-hidden="true">Campus / 2026</span>
+				<span class="notice-note notice-note--1" aria-hidden="true">buy pens</span>
+				<span class="notice-note notice-note--2" aria-hidden="true">2pm?</span>
+				<span class="notice-note notice-note--3" aria-hidden="true">DON'T FORGET</span>
+				<span class="notice-note notice-note--4" aria-hidden="true">meeting -&gt; 4</span>
+				<span class="notice-note notice-note--5" aria-hidden="true">read ch. 4</span>
+				<span class="notice-note notice-note--6" aria-hidden="true">draft 02</span>
+				<figure class="notice-item">
+					<span class="notice-pin notice-pin--gold" aria-hidden="true"></span>
 					<button class="photo-card__trigger" type="button" data-lightbox="true" data-title="Everyday backpack">
 						<img src="images/Everyday Backpack.jpeg" alt="Open wooden cubby shelves filled with various student backpacks" loading="lazy">
 					</button>
 					<figcaption>Everyday backpack</figcaption>
 				</figure>
-				<figure class="photo-card photo-card--feature">
+				<figure class="notice-item">
+					<span class="notice-tape notice-tape--blue" aria-hidden="true"></span>
 					<button class="photo-card__trigger" type="button" data-lightbox="true" data-title="Music setup">
 						<img src="images/Music Setup.jpeg" alt="Music room with drum set, electronic keyboards, instruments, and plastic stools" loading="lazy">
 					</button>
 					<figcaption>Music setup</figcaption>
 				</figure>
-				<figure class="photo-card">
+				<figure class="notice-item">
+					<span class="notice-pin notice-pin--red" aria-hidden="true"></span>
 					<button class="photo-card__trigger" type="button" data-lightbox="true" data-title="Design workshop poster">
 						<img src="images/Design Workshop Poster.jpeg" alt="Framed poster announcing a 3-day Canva design workshop" loading="lazy">
 					</button>
 					<figcaption>Design workshop poster</figcaption>
 				</figure>
-				<figure class="photo-card">
+				<figure class="notice-item">
+					<span class="notice-pin notice-pin--black" aria-hidden="true"></span>
 					<button class="photo-card__trigger" type="button" data-lightbox="true" data-title="Notice board">
 						<img src="images/Notice Board.jpeg" alt="Glass bulletin board filled with student notices, posters, and club flyers" loading="lazy">
 					</button>
