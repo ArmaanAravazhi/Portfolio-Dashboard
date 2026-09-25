@@ -90,6 +90,7 @@ body.reveal-ready .gallery-section.is-visible { opacity: 1; transform: translate
 
 .section-heading h1, .section-heading h2 { font-size: clamp(2rem, 4vw, 4.5rem); font-weight: 400; letter-spacing: -0.04em; margin: 0; }
 .section-number { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.1em; margin: 0; }
+.section-subtitle { color: var(--muted); font-size: 0.82rem; letter-spacing: 0.04em; margin: -10px 0 26px 34px; }
 
 .workspace-grid { display: grid; gap: 28px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .gallery-section--desk .study-desk { min-height: 760px; position: relative; }
@@ -167,7 +168,7 @@ body.reveal-ready .gallery-section.is-visible { opacity: 1; transform: translate
 .environment-grid .photo-card--feature .photo-card__trigger { flex: 1 1 70%; }
 .environment-grid .photo-card--feature figcaption { flex: 0 1 20%; }
 
-.gallery-section--board .section-heading { margin-bottom: 18px; }
+.gallery-section--board .section-heading { margin-bottom: 28px; }
 .notice-board-controls { display: flex; justify-content: flex-end; margin-bottom: 12px; }
 .notice-shuffle {
 	background: transparent;
