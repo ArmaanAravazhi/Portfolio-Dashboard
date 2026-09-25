@@ -290,3 +290,71 @@ if (noticeBoard && noticeItems.length) {
 		scheduleNoticeAutoShuffle();
 	}
 }
+
+const routineArea = document.querySelector('[data-routine-area]');
+const routineTrack = document.querySelector('[data-routine-track]');
+const routineCards = routineTrack ? routineTrack.querySelectorAll('[data-routine-card]') : [];
+const routineTime = document.querySelector('[data-routine-time]');
+const routineMoment = document.querySelector('[data-routine-moment]');
+const routineDots = document.querySelectorAll('[data-routine-dot]');
+const routineTab = document.querySelector('[data-section-tab="section-routine"]');
+
+if (routineArea && routineTrack && routineCards.length) {
+	const routineSticky = routineArea.querySelector('.routine-sticky');
+	const routineViewport = routineArea.querySelector('.routine-viewport');
+	const routineMoments = [
+		{ time: '08:10 AM', label: 'First steps' },
+		{ time: '10:45 AM', label: 'Between classes' },
+		{ time: '01:20 PM', label: 'Lunch break' },
+		{ time: '06:40 PM', label: 'Dinner' },
+		{ time: '11:58 PM', label: 'End-of-day chores' }
+	];
+	let routineFrame = null;
+
+	const updateRoutineLayout = () => {
+		const firstCard = routineCards[0];
+		if (!firstCard.offsetWidth || !routineViewport.clientWidth) return;
+		const sidePadding = Math.max(24, (routineViewport.clientWidth - firstCard.offsetWidth) / 2);
+		routineTrack.style.paddingInline = `${sidePadding}px`;
+	};
+
+	const updateRoutineScroll = () => {
+		routineFrame = null;
+		const scrollRange = Math.max(1, routineArea.offsetHeight - routineSticky.offsetHeight);
+		const areaTop = routineArea.getBoundingClientRect().top;
+		const progress = Math.max(0, Math.min(1, -areaTop / scrollRange));
+		const maxTravel = Math.max(0, routineTrack.scrollWidth - routineViewport.clientWidth);
+		const position = progress * (routineCards.length - 1);
+		const activeIndex = Math.round(position);
+
+		routineTrack.style.transform = `translate3d(${-maxTravel * progress}px, 0, 0)`;
+		routineCards.forEach((card, index) => {
+			const focus = Math.max(0, 1 - Math.abs(position - index));
+			card.style.setProperty('--routine-focus', focus.toFixed(3));
+			card.classList.toggle('is-active', index === activeIndex);
+		});
+		routineTime.textContent = routineMoments[activeIndex].time;
+		routineMoment.textContent = routineMoments[activeIndex].label;
+		routineDots.forEach((dot, index) => dot.classList.toggle('is-active', index === activeIndex));
+	};
+
+	const requestRoutineUpdate = () => {
+		if (routineFrame !== null) return;
+		routineFrame = requestAnimationFrame(updateRoutineScroll);
+	};
+
+	window.addEventListener('scroll', requestRoutineUpdate, { passive: true });
+	window.addEventListener('resize', () => {
+		updateRoutineLayout();
+		requestRoutineUpdate();
+	});
+	routineTab?.addEventListener('click', () => {
+		requestAnimationFrame(() => {
+			updateRoutineLayout();
+			requestRoutineUpdate();
+		});
+	});
+
+	updateRoutineLayout();
+	requestRoutineUpdate();
+}
