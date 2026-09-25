@@ -38,7 +38,9 @@ const activateSectionTab = (sectionId, shouldFocus = false) => {
 
 	gallerySections.forEach((section) => {
 		section.hidden = section.id !== sectionId;
-		section.classList.toggle('is-active', section.id === sectionId);
+		const isActive = section.id === sectionId;
+		section.classList.toggle('is-active', isActive);
+		if (isActive) section.classList.add('is-visible');
 	});
 };
 
@@ -105,11 +107,14 @@ if ('IntersectionObserver' in window) {
 
 if (studyDesk && deskPhotos.length && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 	let framePending = false;
+	let interactionResetTimer;
 	let pointerX = 0;
 	let pointerY = 0;
 	const depth = [0.55, 0.65, 0.8, 1, 0.35];
 
 	const setMakeRoom = (activePhoto) => {
+		window.clearTimeout(interactionResetTimer);
+		studyDesk.classList.add('is-interacting');
 		const activeBounds = activePhoto.getBoundingClientRect();
 		const activeCenter = {
 			x: activeBounds.left + activeBounds.width / 2,
@@ -138,12 +143,17 @@ if (studyDesk && deskPhotos.length && window.matchMedia('(hover: hover) and (poi
 	};
 
 	const resetMakeRoom = () => {
+		window.clearTimeout(interactionResetTimer);
+		studyDesk.classList.add('is-interacting');
 		deskPhotos.forEach((photo) => {
 			photo.classList.remove('is-hovered');
 			photo.style.zIndex = '';
 			photo.style.setProperty('--make-room-x', '0px');
 			photo.style.setProperty('--make-room-y', '0px');
 		});
+		interactionResetTimer = window.setTimeout(() => {
+			studyDesk.classList.remove('is-interacting');
+		}, 100);
 	};
 
 	deskPhotos.forEach((photo) => {
